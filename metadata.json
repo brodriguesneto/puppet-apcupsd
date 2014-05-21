@@ -1,0 +1,23 @@
+{
+  "author": "brodrigues",
+  "checksums": {
+    "Rakefile": "f37e6131fe7de9a49b09d31596f5fbf1",
+    "manifests/params.pp": "d37514654de0c17b3f68c24956b185fd",
+    "manifests/install.pp": "5df00b700847a5c402a31b95f0ee3300",
+    "manifests/init.pp": "e32b26919a341e4baf67b29a8e0953ef",
+    "Modulefile": "ba4b9bc0694a8e5d62b176738d2d68e5",
+    "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+    "tests/init.pp": "d937980b9f30d69ac42ffb03f0953d4f",
+    "spec/spec_helper.rb": "3ea886dd135e120afa31e0aab12e85b0",
+    "README.markdown": "0d4829c90f409b2b5e47009c7166622c"
+  },
+  "dependencies": [],
+  "description": "Apcupsd can be used for power mangement and controlling most of APC’s UPS models. This modules is aims to do the same via puppet.",
+  "license": "Apache License, Version 2.0",
+  "name": "brodrigues-apcupsd",
+  "project_page": "https://github.com/brodriguesneto/puppet-apcupsd",
+  "source": "https://github.com/brodriguesneto/puppet-apcupsd",
+  "summary": "Module to install and manages Apcupsd via puppet",
+  "types": [],
+  "version": "0.1.0"
+}

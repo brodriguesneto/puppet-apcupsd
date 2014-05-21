@@ -1,0 +1,3 @@
+# apcupsd #
+
+This is the apcupsd module. It provides...
