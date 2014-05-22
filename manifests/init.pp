@@ -10,12 +10,8 @@
 #
 # Sample Usage:
 #
-class apcupsd {
-  $ensure = 'present',
-  $autoupgrade = false,
-  $package = $apcupsd::params::package,
-  $package_ensure = $apcupsd::params::package_ensure,
+class apcupsd{
   
-  include apcupsd::install, apcupsd::config, apcupsd::service
+  include apcupsd::params, apcupsd::install, apcupsd::config, apcupsd::service
 
-} inherits apcupsd::params
+}

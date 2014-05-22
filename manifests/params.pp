@@ -1,34 +1,46 @@
-class apcupsd::params {
+class apcupsd::params(
+  $ensure = 'present',
+  $autoupgrade = false,
+){
 
   case $::operatingsystem {
     'Ubuntu': {
       case $::lsbdistrelease {
-        '/(^14.04|12.04)$/': {
-           $package = ['apcupsd', 'apcupsd-cgi']
+        '/(^10.04|12.04|14.04)$/': {
+          $package_name = ['apcupsd', 'apcupsd-cgi',]
         }
         default: {
-          fail("Unsupported lsbdistrelease: $1")
+          case $::lsbdistrelease {
+            default: {
+              fail("Unsupported Ubuntu suite: ${::lsbdistrelease}")
+            }
+          }
         }
-    } 
-    default: {
-      fail("Unsupported operating system: $1")
+      }
     }
-  }
+   default: {
+        case $::operatingsystem {
+          default: {
+            fail("Unsupported operating system: ${::operatingsystem}")
+          }
+        }
+      }
+    }
 
-  case $ensure {
+   case $ensure {
     /(present)/: {
       if $autoupgrade == true {
         $package_ensure = 'latest'
-      } else {
+      }
+      else {
         $package_ensure = 'present'
-      }   
-    }   
+      }
+    }
     /(absent)/: {
       $package_ensure = 'absent'
-    }   
+    }
     default: {
-      fail('ensure parameter must be present or absent')
-    }   
-  }
-
+        fail('ensure parameter must be present or absent')
+   }
+ }
 }
