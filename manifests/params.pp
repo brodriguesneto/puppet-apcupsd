@@ -6,7 +6,7 @@ class apcupsd::params(
   case $::operatingsystem {
     'Ubuntu': {
       case $::lsbdistrelease {
-        '/(^10.04|12.04|14.04)$/': {
+        /(10.04|12.04|14.04)/: {
           $package_name = ['apcupsd', 'apcupsd-cgi',]
         }
         default: {
