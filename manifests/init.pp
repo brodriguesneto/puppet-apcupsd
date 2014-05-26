@@ -10,8 +10,6 @@
 #
 # Sample Usage:
 #
-class apcupsd{
-  
-  include apcupsd::params, apcupsd::install, apcupsd::config, apcupsd::service
-
+class apcupsd inherits apcupsd::params {
+  include apcupsd::install, apcupsd::config, apcupsd::service
 }
