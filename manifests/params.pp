@@ -1,9 +1,23 @@
-class apcupsd::params ($ensure = 'present', $autoupgrade = false,) {
+class apcupsd::params (
+  $ensure         = 'present',
+  $autoupgrade    = false,
+  $upscable       = 'usb',
+  $upstype        = undef,
+  $device         = undef,
+  $hostname       = undef,
+  $snmp           = undef,
+  $port           = undef,
+  $vendor         = undef,
+  $community      = undef,
+  $onbatterydelay = '6',
+  $batterylevel   = '5',
+  $minutes        = '3',) {
   case $::operatingsystem {
     'Ubuntu' : {
       case $::lsbdistrelease {
         /(10.04|12.04|14.04)/ : {
           $package_name = 'apcupsd'
+          $package_extras = ['apcupsd-cgi', 'apcupsd-doc',]
           $service_name = 'apcupsd'
         }
         default               : {
@@ -38,36 +52,11 @@ class apcupsd::params ($ensure = 'present', $autoupgrade = false,) {
 }
 
 define apcupsd::script ($conf = $title, $email = 'root@localhost') {
-  file { "/etc/apcupsd/$conf" :
+  file { "/etc/apcupsd/$conf":
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
     mode    => 0755,
-    content => template("apcupsd/${conf}.erb"),
-    require => Package["$apcupsd::params::package_name"],
-    notify  => Service["$apcupsd::params::service_name"],
-  }
-}
-
-define apcupsd::conf(
-  $conf = $title,
-  $upscable = 'usb',
-  $upstype = undef,
-  $device = undef,
-  $hostname = undef,
-  $snmp = undef,
-  $port = undef,
-  $vendor = undef,
-  $community = undef,
-  $onbatterydelay = '10',
-  $batterylevel = '30',
-  $minutes = '20',
-  ) {
-  file { "/etc/apcupsd/$conf" :
-    ensure  => 'file',
-    owner   => 'root',
-    group   => 'root',
-    mode    => 0644,
     content => template("apcupsd/${conf}.erb"),
     require => Package["$apcupsd::params::package_name"],
     notify  => Service["$apcupsd::params::service_name"],
