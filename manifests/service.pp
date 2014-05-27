@@ -1,0 +1,3 @@
+class apcupsd::service {
+  
+}

@@ -4,6 +4,7 @@ class apcupsd::params ($ensure = 'present', $autoupgrade = false,) {
       case $::lsbdistrelease {
         /(10.04|12.04|14.04)/ : {
           $package_name = ['apcupsd', 'apcupsd-cgi',]
+          $service_name = 'apcupsd'
         }
         default               : {
           case $::lsbdistrelease {
@@ -33,5 +34,17 @@ class apcupsd::params ($ensure = 'present', $autoupgrade = false,) {
     default     : {
       fail('ensure parameter must be present or absent')
     }
+  }
+}
+
+define apcupsd::script ($conf = $title, $email = 'root@localhost') {
+  file { "$conf":
+    ensure  => 'file',
+    owner   => 'root',
+    group   => 'root',
+    mode    => 0755,
+    content => template('apcupsd/${conf}.erb'),
+    require => Package['$apcupsd::params::package_name'],
+    notify  => Service['$apcupsd::params::service_name'],
   }
 }
