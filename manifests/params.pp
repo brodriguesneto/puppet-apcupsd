@@ -52,6 +52,8 @@ define apcupsd::script ($conf = $title, $email = 'root@localhost') {
 define apcupsd::conf(
   $conf = $title,
   $upscable = 'usb',
+  $upstype = undef,
+  $device = undef,
   $hostname = undef,
   $snmp = undef,
   $port = undef,

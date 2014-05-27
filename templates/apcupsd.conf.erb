@@ -6,7 +6,7 @@ UPSNAME <%= @fqdn %>
 # UPSCABLE <cable>
 # smart, ether, usb
 
-UPSCABLE <%= $upscable %>
+UPSCABLE <%= upscable %>
 
 # UPSTYPE   DEVICE
 #
@@ -14,31 +14,31 @@ UPSCABLE <%= $upscable %>
 # usb       <BLANK>
 # net       hostname:port
 # snmp      hostname:port:vendor:community
-UPSTYPE <%=
-case $upscable
+UPSTYPE <%= upstype = case upscable
   when "usb"
-	  puts "usb"
+           "usb"
   when "ether"
-	  if $snmp.empty? then puts "net" else puts "snmp" end
+          if $snmp.empty? then  "net" else "snmp" end 
   when "smart"
-	  puts "apcsmart"
+           "apcsmart"
   else
-        puts "usb"
+        ""
 end
 %>
-
-DEVICE <%=
-case $upscable
+DEVICE <%= device = case upscable
   when "usb"
- 	  puts ""
+          ""  
   when "ether"
-	  if $snmp.empty? then puts $hostname:$port else puts $hostname:$port:$vendor:$community end
+          if $snmp.empty? then
+                "#{hostname}:#{port}"
+          else
+             "#{hostname}:#{port}:#{vendor}:#{community}"
+          end
   when "smart"
-	  puts "/dev/ttyS0"
-  else    puts ""
+          "/dev/ttyS0"
+  else    ""
 end
 %>
-
 
 POLLTIME 60
 LOCKFILE /var/lock
