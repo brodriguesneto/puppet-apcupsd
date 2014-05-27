@@ -1,4 +1,6 @@
 class apcupsd::config {
+  apcupsd::config {'apcupsd.conf': }
+  
   apcupsd::script { 'changeme': }
 
   apcupsd::script { 'commfailure': }

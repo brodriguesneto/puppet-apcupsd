@@ -1,0 +1,68 @@
+## apcupsd.conf v1.1 ##
+UPSNAME <%= @fqdn %>
+
+# UPSCABLE <cable>
+# smart, ether, usb
+
+UPSCABLE <%= $upscable %>
+
+# UPSTYPE   DEVICE
+#
+# apcsmart  /dev/tty**
+# usb       <BLANK>
+# net       hostname:port
+# snmp      hostname:port:vendor:community
+UPSTYPE <%=
+case $upscable
+  when "usb"
+	  puts "usb"
+  when "ether"
+	  if $snmp.empty? then puts "net" else puts "snmp" end
+  when "smart"
+	  puts "apcsmart"
+  else
+        puts "usb"
+end
+%>
+
+DEVICE <%=
+case $upscable
+  when "usb"
+ 	  puts ""
+  when "ether"
+	  if $snmp.empty? then puts $hostname:$port else puts $hostname:$port:$vendor:$community end
+  when "smart"
+	  puts "/dev/ttyS0"
+  else    puts ""
+end
+%>
+
+
+POLLTIME 60
+LOCKFILE /var/lock
+SCRIPTDIR /etc/apcupsd
+PWRFAILDIR /etc/apcupsd
+NOLOGINDIR /etc
+
+ONBATTERYDELAY <%= $onbatterydelay %>
+BATTERYLEVEL <%= $batterylevel %>
+MINUTES <%= $minutes %>
+TIMEOUT 0
+ANNOY 300
+ANNOYDELAY 60
+NOLOGON disable
+KILLDELAY 0
+
+NETSERVER on
+NISIP 127.0.0.1
+NISPORT 3551
+EVENTSFILE /var/log/apcupsd.events
+EVENTSFILEMAX 10
+
+UPSCLASS standalone
+UPSMODE disable
+
+STATTIME 0
+STATFILE /var/log/apcupsd.status
+LOGSTATS off
+DATATIME 0
