@@ -1,4 +1,6 @@
 ### PUPPET MODULE TEMPLATE !DO NOT TOUCH! ###
+
+# UPSNAME <name>
 UPSNAME <%= @fqdn %>
 
 # UPSCABLE <cable>
@@ -44,9 +46,9 @@ SCRIPTDIR /etc/apcupsd
 PWRFAILDIR /etc/apcupsd
 NOLOGINDIR /etc
 
-ONBATTERYDELAY <%= $onbatterydelay %>
-BATTERYLEVEL <%= $batterylevel %>
-MINUTES <%= $minutes %>
+ONBATTERYDELAY <%= onbatterydelay %>
+BATTERYLEVEL <%= batterylevel %>
+MINUTES <%= minutes %>
 TIMEOUT 0
 ANNOY 300
 ANNOYDELAY 60
