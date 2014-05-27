@@ -5,10 +5,10 @@
 # UPS goes back on to the mains after a power failure.
 # We send an email message to root to notify him.
 #
-SYSADMIN=<% @email %>
+SYSADMIN=<%= email %>
 APCUPSD_MAIL="mail"
 
-HOSTNAME=<% @hostname %>
+HOSTNAME=<%= @fqdn %>
 MSG="$HOSTNAME Power has returned"
 #
 (

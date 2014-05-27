@@ -3,7 +3,7 @@ class apcupsd::params ($ensure = 'present', $autoupgrade = false,) {
     'Ubuntu' : {
       case $::lsbdistrelease {
         /(10.04|12.04|14.04)/ : {
-          $package_name = ['apcupsd', 'apcupsd-cgi',]
+          $package_name = 'apcupsd'
           $service_name = 'apcupsd'
         }
         default               : {
@@ -38,13 +38,13 @@ class apcupsd::params ($ensure = 'present', $autoupgrade = false,) {
 }
 
 define apcupsd::script ($conf = $title, $email = 'root@localhost') {
-  file { "$conf":
+  file { "/etc/apcupsd/$conf" :
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
     mode    => 0755,
-    content => template('apcupsd/${conf}.erb'),
-    require => Package['$apcupsd::params::package_name'],
-    notify  => Service['$apcupsd::params::service_name'],
+    content => template("apcupsd/${conf}.erb"),
+    require => Package["$apcupsd::params::package_name"],
+    notify  => Service["$apcupsd::params::service_name"],
   }
 }
