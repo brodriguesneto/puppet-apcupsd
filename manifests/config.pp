@@ -1,5 +1,5 @@
 class apcupsd::config {
-  apcupsd::config {'apcupsd.conf': }
+  apcupsd::conf   {'apcupsd.conf': }
   
   apcupsd::script { 'changeme': }
 

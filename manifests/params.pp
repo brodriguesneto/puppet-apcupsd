@@ -49,7 +49,7 @@ define apcupsd::script ($conf = $title, $email = 'root@localhost') {
   }
 }
 
-define apcupsd::config(
+define apcupsd::conf(
   $conf = $title,
   $upscable = 'usb',
   $hostname = undef,
