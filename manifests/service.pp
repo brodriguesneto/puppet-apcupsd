@@ -4,6 +4,6 @@ class apcupsd::service {
     enable     => true,
     hasstatus  => true,
     hasrestart => true,
-    require    => Class["apcupsd::config"],
+    require    => Class['apcupsd::config'],
   }
 }

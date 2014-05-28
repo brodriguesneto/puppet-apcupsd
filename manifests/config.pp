@@ -15,9 +15,9 @@ class apcupsd::config (
     owner   => 'root',
     group   => 'root',
     mode    => 0644,
-    content => template("apcupsd/apcupsd.conf.erb"),
-    require => Package["$apcupsd::params::package_name"],
-    notify  => Service["$apcupsd::params::service_name"],
+    content => template('apcupsd/apcupsd.conf.erb'),
+    require => Package[$apcupsd::params::package_name],
+    notify  => Service[$apcupsd::params::service_name],
   }
 
   file { '/etc/default/apcupsd':
@@ -25,9 +25,9 @@ class apcupsd::config (
     owner   => 'root',
     group   => 'root',
     mode    => 0644,
-    content => template("apcupsd/apcupsd.default.erb"),
-    require => Package["$apcupsd::params::package_name"],
-    notify  => Service["$apcupsd::params::service_name"],
+    content => template('apcupsd/apcupsd.default.erb'),
+    require => Package[$apcupsd::params::package_name],
+    notify  => Service[$apcupsd::params::service_name],
   }
 
   apcupsd::script { 'changeme': }
