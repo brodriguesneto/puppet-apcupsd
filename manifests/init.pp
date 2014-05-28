@@ -19,6 +19,6 @@ class apcupsd (
   $minutes        = '20',) inherits apcupsd::params {
   include apcupsd::install, apcupsd::config, apcupsd::service
 
-  Class['apcupsd::install'] -> Class[apcupsd::config] ~> Class['apcupsd::service']
+  Class['apcupsd::install'] -> Class['apcupsd::config'] ~> Class['apcupsd::service']
 
 }

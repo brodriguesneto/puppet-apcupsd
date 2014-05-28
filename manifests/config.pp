@@ -8,6 +8,16 @@ class apcupsd::config {
     require => Package["$apcupsd::params::package_name"],
     notify  => Service["$apcupsd::params::service_name"],
   }
+  
+  file {'/etc/default/apcupsd':
+    ensure  => 'file',
+    owner   => 'root',
+    group   => 'root',
+    mode    => 0644,
+    content => template('apcupsd/apcupsd.default.erb'),
+    require => Package["$apcupsd::params::package_name"],
+    notify  => Service["$apcupsd::params::service_name"],
+  }
 
   apcupsd::script { 'changeme': }
 
