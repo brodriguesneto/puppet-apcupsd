@@ -11,14 +11,22 @@
 # Sample Usage:
 #
 class apcupsd (
-  $ensure         = 'present',
+  $ensure         = 'absent',
   $autoupgrade    = false,
-  $upscable       = 'usb',
+  $email          = 'root@example.com',
+  $upscable       = 'ether',
+  $upstype        = undef,
+  $device         = undef,
+  $devtty         = "/dev/ttyS0",
+  $host           = "localhost",
+  $snmp           = true,
+  $port           = "161",
+  $vendor         = apc,
+  $community      = public,
   $onbatterydelay = '10',
-  $batterylevel   = '30',
+  $batterylevel   = '30', 
   $minutes        = '20',) inherits apcupsd::params {
   include apcupsd::install, apcupsd::config, apcupsd::service
 
   Class['apcupsd::install'] -> Class['apcupsd::config'] ~> Class['apcupsd::service']
-
 }

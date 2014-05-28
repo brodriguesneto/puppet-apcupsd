@@ -1,7 +1,8 @@
+## apcupsd.conf v1.1 ##
 ### PUPPET MODULE TEMPLATE !DO NOT TOUCH! ###
 
 # UPSNAME <name>
-UPSNAME <%= @fqdn %>
+UPSNAME <%= @hostname %>
 
 # UPSCABLE <cable>
 # smart, ether, usb
@@ -12,31 +13,36 @@ UPSCABLE <%= upscable %>
 #
 # apcsmart  /dev/tty**
 # usb       <BLANK>
-# net       hostname:port
-# snmp      hostname:port:vendor:community
+# net       host:port
+# snmp      host:port:vendor:community
 UPSTYPE <%= upstype = case upscable
   when "usb"
-           "usb"
+          "usb"
   when "ether"
-          if $snmp.empty? then  "net" else "snmp" end 
+          if snmp then
+            "snmp"
+          else
+            "net"
+          end
   when "smart"
-           "apcsmart"
+          "apcsmart"
   else
-        ""
+          ""
 end
 %>
 DEVICE <%= device = case upscable
   when "usb"
-          ""  
+          ""
   when "ether"
-          if $snmp.empty? then
-                "#{hostname}:#{port}"
+          if snmp then
+             "#{host}:#{port}:#{vendor}:#{community}"
           else
-             "#{hostname}:#{port}:#{vendor}:#{community}"
+             "#{host}:#{port}"
           end
   when "smart"
-          "/dev/ttyS0"
-  else    ""
+          devtty
+  else    
+       ""
 end
 %>
 
