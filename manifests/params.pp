@@ -54,7 +54,7 @@ class apcupsd::params {
   }
 }
 
-define apcupsd::script ($conf = $title, $email = $apcupsd::email,) {
+define apcupsd::script ($conf = $title, $email = $apcupsd::email, $host_name = $::hostname) {
   file { "/etc/apcupsd/${conf}":
     ensure  => 'file',
     owner   => 'root',
