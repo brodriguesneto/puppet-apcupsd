@@ -13,7 +13,7 @@
 class apcupsd (
   $ensure         = 'absent',
   $autoupgrade    = false,
-  $email          = 'root@example.com',
+  $email          = 'root@example.com.br',
   $upscable       = 'ether',
   $upstype        = undef,
   $device         = undef,
