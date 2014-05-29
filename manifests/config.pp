@@ -1,15 +1,4 @@
-class apcupsd::config (
-  $upscable       = $apcupsd::upscable,
-  $upstype        = $apcupsd::upstype,
-  $device         = $apcupsd::device,
-  $host           = $apcupsd::host,
-  $snmp           = $apcupsd::snmp,
-  $port           = $apcupsd::port,
-  $vendor         = $apcupsd::vendor,
-  $community      = $apcupsd::community,
-  $onbatterydelay = $apcupsd::onbatterydelay,
-  $batterylevel   = $apcupsd::batterylevel,
-  $minutes        = $apcupsd::minutes,) {
+class apcupsd::config {
   file { '/etc/apcupsd/apcupsd.conf':
     ensure  => 'file',
     owner   => 'root',
@@ -30,13 +19,25 @@ class apcupsd::config (
     notify  => Service[$apcupsd::params::service_name],
   }
 
-  apcupsd::script { 'changeme': }
+  define apc_script ($conf = $title, $email = $apcupsd::mailto, $host_name = $::hostname) {
+    file { "/etc/apcupsd/${conf}":
+      ensure  => 'file',
+      owner   => 'root',
+      group   => 'root',
+      mode    => 0755,
+      content => template("apcupsd/${conf}.erb"),
+      require => Package[$apcupsd::params::package_name],
+      notify  => Service[$apcupsd::params::service_name],
+    }
+  }
 
-  apcupsd::script { 'commfailure': }
+  apc_script { 'changeme': }
 
-  apcupsd::script { 'commok': }
+  apc_script { 'commfailure': }
 
-  apcupsd::script { 'offbattery': }
+  apc_script { 'commok': }
 
-  apcupsd::script { 'onbattery': }
+  apc_script { 'offbattery': }
+
+  apc_script { 'onbattery': }
 }

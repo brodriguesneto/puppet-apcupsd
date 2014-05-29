@@ -11,22 +11,32 @@
 # Sample Usage:
 #
 class apcupsd (
-  $ensure         = 'absent',
+  $ensure         = 'present',
   $autoupgrade    = false,
-  $email          = 'root@example.com',
-  $upscable       = 'ether',
-  $upstype        = undef,
-  $device         = undef,
-  $devtty         = '/dev/ttyS0',
-  $host           = 'localhost',
-  $snmp           = true,
-  $port           = '161',
-  $vendor         = 'apc',
-  $community      = 'public',
-  $onbatterydelay = '10',
-  $batterylevel   = '30', 
-  $minutes        = '20',) inherits apcupsd::params {
-  include apcupsd::install, apcupsd::config, apcupsd::service
-
-  Class['apcupsd::install'] -> Class['apcupsd::config'] ~> Class['apcupsd::service']
+  $mailto         = undef,
+  $upscable       = undef,
+  $devtty         = undef,
+  $host           = undef,
+  $port           = undef,
+  $snmp           = false,
+  $vendor         = undef,
+  $community      = undef,
+  $onbatterydelay = undef,
+  $batterylevel   = undef,
+  $minutes        = undef,) inherits apcupsd::params {
+  case $ensure {
+    /(present)/ : {
+      if $autoupgrade == true {
+        $package_ensure = 'latest'
+      } else {
+        $package_ensure = 'present'
+      }
+    }
+    /(absent)/  : {
+      $package_ensure = 'absent'
+    }
+    default     : {
+      fail('ensure parameter must be present or absent')
+    }
+  }
 }

@@ -19,11 +19,9 @@ UPSTYPE <%= upstype = case upscable
   when "usb"
           "usb"
   when "ether"
-          if snmp then
-            "snmp"
-          else
-            "net"
-          end
+          "net"
+  when "snmp"
+          "snmp"
   when "smart"
           "apcsmart"
   else
