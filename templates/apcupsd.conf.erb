@@ -2,12 +2,12 @@
 ### PUPPET MODULE TEMPLATE !DO NOT TOUCH! ###
 
 # UPSNAME <name>
-UPSNAME <%= @hostname %>
+UPSNAME <%= hostname %>
 
 # UPSCABLE <cable>
 # smart, ether, usb
 
-UPSCABLE <%= @upscable %>
+UPSCABLE <%= upscable %>
 
 # UPSTYPE   DEVICE
 #
@@ -15,18 +15,18 @@ UPSCABLE <%= @upscable %>
 # usb       <BLANK>
 # net       host:port
 # snmp      host:port:vendor:community
-UPSTYPE <%= @upstype = case @upscable
+UPSTYPE <%= upstype = case upscable
   when "usb"
          "usb"
   when "ether"
-	  @snmp ? "snmp" : "net"
+	  snmp ? "snmp" : "net"
   when "smart"
          "apcsmart"
   else
          ""
 end
 %>
-DEVICE <%= @device = case @upscable
+DEVICE <%= device = case upscable
   when "usb"
           ""
   when "ether"
