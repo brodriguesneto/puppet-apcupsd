@@ -1,4 +1,4 @@
-define apcupsd::slave (
+class apcupsd::slave (
   $upscable       = 'ether',
   $port           = 3551,
   $host           = '127.0.0.1',

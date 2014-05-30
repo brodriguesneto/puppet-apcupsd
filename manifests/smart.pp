@@ -1,4 +1,4 @@
-define apcupsd::smart (
+class apcupsd::smart (
   $upscable       = 'smart',
   $devtty         = '/dev/ttyS0',
   $mailto         = 'root@example.com.br',

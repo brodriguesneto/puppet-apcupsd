@@ -1,4 +1,4 @@
-define apcupsd::snmp (
+class apcupsd::snmp (
   $upscable       = 'ether',
   $snmp           = true,
   $port           = 161,
