@@ -24,6 +24,8 @@ class apcupsd (
   $onbatterydelay = undef,
   $batterylevel   = undef,
   $minutes        = undef,) inherits apcupsd::params {
+  include apcupsd::install, apcupsd::config, apcupsd::service
+
   case $ensure {
     /(present)/ : {
       if $autoupgrade == true {

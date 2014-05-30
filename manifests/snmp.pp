@@ -1,4 +1,4 @@
-class apcupsd::snmp (
+define apcupsd::snmp (
   $upscable       = 'ether',
   $snmp           = true,
   $port           = 161,
@@ -8,7 +8,7 @@ class apcupsd::snmp (
   $mailto         = 'root@example.com.br',
   $onbatterydelay = 10,
   $batterylevel   = 30,
-  $minutes        = 20,) inherits apcupsd {
-  include apcupsd::install, apcupsd::config, apcupsd::service
+  $minutes        = 20,) {
+  include apcupsd
   Class['apcupsd::install'] -> Class['apcupsd::config'] ~> Class['apcupsd::service']
 }
