@@ -30,7 +30,7 @@ DEVICE <%= @device = case @upscable
   when "usb"
           ""
   when "ether"
-          @snmp ? "#{host}:#{port}:#{vendor}:#{community}" : "#{host}:#{port}"
+          @snmp ? "#{@host}:#{@port}:#{@vendor}:#{@community}" : "#{@host}:#{@port}"
   when "smart"
           @devtty
   else    
