@@ -17,26 +17,20 @@ UPSCABLE <%= upscable %>
 # snmp      host:port:vendor:community
 UPSTYPE <%= upstype = case upscable
   when "usb"
-          "usb"
+         "usb"
   when "ether"
-          "net"
-  when "snmp"
-          "snmp"
+	  snmp ? "snmp" : "net"
   when "smart"
-          "apcsmart"
+         "apcsmart"
   else
-          ""
+         ""
 end
 %>
 DEVICE <%= device = case upscable
   when "usb"
           ""
   when "ether"
-          if snmp then
-             "#{host}:#{port}:#{vendor}:#{community}"
-          else
-             "#{host}:#{port}"
-          end
+          snmp ? "#{host}:#{port}:#{vendor}:#{community}" : "#{host}:#{port}"
   when "smart"
           devtty
   else    
