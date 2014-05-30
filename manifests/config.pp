@@ -19,7 +19,7 @@ class apcupsd::config {
     notify  => Service[$apcupsd::params::service_name],
   }
 
-  define apc_script ($conf = $title, $email = $apcupsd::mailto, $host_name = $::hostname) {
+  define apc_script ($conf = $title, $email = $::mailto, $host_name = $::hostname) {
     file { "/etc/apcupsd/${conf}":
       ensure  => 'file',
       owner   => 'root',
