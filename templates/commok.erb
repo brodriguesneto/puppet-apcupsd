@@ -5,10 +5,10 @@
 # restores contact with the UPS (i.e. the serial connection is restored).
 # We send an email message to root to notify him.
 #
-SYSADMIN=<%= email %>
+SYSADMIN=<%= @mailto %>
 APCUPSD_MAIL="mail"
 
-HOSTNAME=<%= host_name %>
+HOSTNAME=<%= @hostname %>
 MSG="$HOSTNAME Communications with UPS restored"
 #
 (
