@@ -1,4 +1,4 @@
-class apcupsd::usb ($upscable = 'usb', $mailto = 'root@localhost', $onbatterydelay = 10, $batterylevel = 30, $minutes = 20,) {
+define apcupsd::usb ($upscable, $mailto, $onbatterydelay, $batterylevel, $minutes,) {
   include apcupsd
   Class['apcupsd::install'] -> Class['apcupsd::config'] ~> Class['apcupsd::service']
 }
