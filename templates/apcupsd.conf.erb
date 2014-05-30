@@ -7,7 +7,7 @@ UPSNAME <%= @hostname %>
 # UPSCABLE <cable>
 # smart, ether, usb
 
-UPSCABLE <%= upscable %>
+UPSCABLE <%= @upscable %>
 
 # UPSTYPE   DEVICE
 #
@@ -15,24 +15,24 @@ UPSCABLE <%= upscable %>
 # usb       <BLANK>
 # net       host:port
 # snmp      host:port:vendor:community
-UPSTYPE <%= upstype = case upscable
+UPSTYPE <%= @upstype = case @upscable
   when "usb"
          "usb"
   when "ether"
-	  snmp ? "snmp" : "net"
+	  @snmp ? "snmp" : "net"
   when "smart"
          "apcsmart"
   else
          ""
 end
 %>
-DEVICE <%= device = case upscable
+DEVICE <%= @device = case @upscable
   when "usb"
           ""
   when "ether"
-          snmp ? "#{host}:#{port}:#{vendor}:#{community}" : "#{host}:#{port}"
+          @snmp ? "#{host}:#{port}:#{vendor}:#{community}" : "#{host}:#{port}"
   when "smart"
-          devtty
+          @devtty
   else    
        ""
 end
@@ -44,9 +44,9 @@ SCRIPTDIR /etc/apcupsd
 PWRFAILDIR /etc/apcupsd
 NOLOGINDIR /etc
 
-ONBATTERYDELAY <%= onbatterydelay %>
-BATTERYLEVEL <%= batterylevel %>
-MINUTES <%= minutes %>
+ONBATTERYDELAY <%= @onbatterydelay %>
+BATTERYLEVEL <%= @batterylevel %>
+MINUTES <%= @minutes %>
 TIMEOUT 0
 ANNOY 300
 ANNOYDELAY 60
