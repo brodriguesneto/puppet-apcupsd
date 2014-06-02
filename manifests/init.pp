@@ -11,19 +11,20 @@
 # Sample Usage:
 #
 class apcupsd (
-  $ensure         = 'present',
-  $autoupgrade    = false,
-  $mailto         = undef,
-  $upscable       = undef,
-  $devtty         = undef,
-  $host           = undef,
-  $port           = undef,
-  $snmp           = false,
-  $vendor         = undef,
-  $community      = undef,
-  $onbatterydelay = undef,
-  $batterylevel   = undef,
-  $minutes        = undef,) inherits apcupsd::params {
+  $ensure              = 'present',
+  $autoupgrade         = false,
+  $mailto              = undef,
+  $pre_shutdown        = false,
+  $pre_shutdown_script = '/usr/local/sbin/pre_halt_script.sh',
+  $devtty              = undef,
+  $host                = undef,
+  $port                = undef,
+  $snmp                = false,
+  $vendor              = undef,
+  $community           = undef,
+  $onbatterydelay      = undef,
+  $batterylevel        = undef,
+  $minutes             = undef,) inherits apcupsd::params {
   case $ensure {
     /(present)/ : {
       if $autoupgrade == true {

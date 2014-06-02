@@ -31,6 +31,8 @@ class apcupsd::config {
     }
   }
 
+  apc_script { 'apccontrol': }
+
   apc_script { 'changeme': }
 
   apc_script { 'commfailure': }

@@ -3,6 +3,7 @@ class apcupsd::slave (
   $port           = 3551,
   $host           = '127.0.0.1',
   $mailto         = 'root@example.com.br',
+  $pre_shutdown   = true,
   $onbatterydelay = 10,
   $batterylevel   = 30,
   $minutes        = 20,) inherits apcupsd {

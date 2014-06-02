@@ -6,6 +6,7 @@ class apcupsd::snmp (
   $vendor         = 'apc',
   $community      = 'public',
   $mailto         = 'root@example.com',
+  $pre_shutdown   = true,
   $onbatterydelay = 10,
   $batterylevel   = 30,
   $minutes        = 20,) inherits apcupsd {
