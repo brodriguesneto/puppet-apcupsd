@@ -14,7 +14,7 @@
   "dependencies": [],
   "description": "Apcupsd can be used for power mangement and controlling most of APC’s UPS models. This modules aims to do the same via puppet.",
   "license": "Apache License, Version 2.0",
-  "name": "brodrigues-apcupsd",
+  "name": "brodriguesneto-apcupsd",
   "project_page": "https://github.com/brodriguesneto/puppet-apcupsd",
   "source": "https://github.com/brodriguesneto/puppet-apcupsd",
   "summary": "Module to install and manages Apcupsd via puppet",
