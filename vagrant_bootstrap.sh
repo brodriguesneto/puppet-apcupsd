@@ -1,6 +1,5 @@
-#!/usr/bin/env bash
-
-aptitude update
-aptitude upgrade
-aptitude -y install  puppetmaster puppet-lint ruby2.0 ruby2.0-doc vim
-ln -s /vagrant /etc/puppet/modules/apcupsd
+#!/bin/sh
+/usr/bin/aptitude update
+/usr/bin/aptitude upgrade
+/usr/bin/aptitude -y install vim puppet-lint
+/bin/ln -s /vagrant /etc/puppet/modules/apcupsd
