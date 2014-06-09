@@ -15,8 +15,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #config.vm.cpus             = 2
 
   ### Network
-  # Bridge
-  #config.vm.network "public_network"
+  # Bridge network
+  config.vm.network "public_network"
   # SSH agent
   config.ssh.forward_agent   = true
 
