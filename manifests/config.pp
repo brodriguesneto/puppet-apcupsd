@@ -3,7 +3,7 @@ class apcupsd::config {
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
-    mode    => 0644,
+    mode    => '0644',
     content => template('apcupsd/apcupsd.conf.erb'),
     require => Package[$apcupsd::params::package_name],
     notify  => Service[$apcupsd::params::service_name],
@@ -13,33 +13,21 @@ class apcupsd::config {
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
-    mode    => 0644,
+    mode    => '0644',
     content => template('apcupsd/apcupsd.default.erb'),
     require => Package[$apcupsd::params::package_name],
     notify  => Service[$apcupsd::params::service_name],
   }
 
-  define apc_script ($conf = $title,) {
-    file { "/etc/apcupsd/${conf}":
-      ensure  => 'file',
-      owner   => 'root',
-      group   => 'root',
-      mode    => 0755,
-      content => template("apcupsd/${conf}.erb"),
-      require => Package[$apcupsd::params::package_name],
-      notify  => Service[$apcupsd::params::service_name],
-    }
-  }
+  apcupsd::apc_script { 'apccontrol': }
 
-  apc_script { 'apccontrol': }
+  apcupsd::apc_script { 'changeme': }
 
-  apc_script { 'changeme': }
+  apcupsd::apc_script { 'commfailure': }
 
-  apc_script { 'commfailure': }
+  apcupsd::apc_script { 'commok': }
 
-  apc_script { 'commok': }
+  apcupsd::apc_script { 'offbattery': }
 
-  apc_script { 'offbattery': }
-
-  apc_script { 'onbattery': }
+  apcupsd::apc_script { 'onbattery': }
 }
