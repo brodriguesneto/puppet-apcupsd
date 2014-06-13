@@ -4,9 +4,9 @@ class apcupsd::config {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('apcupsd/apcupsd.conf.erb'),
-    require => Package[$apcupsd::params::package_name],
-    notify  => Service[$apcupsd::params::service_name],
+    content => template("${module_name}/apcupsd.conf.erb"),
+    require => Package[$apcupsd::params::package],
+    notify  => Service[$apcupsd::params::service],
   }
 
   file { '/etc/default/apcupsd':
@@ -14,9 +14,9 @@ class apcupsd::config {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('apcupsd/apcupsd.default.erb'),
-    require => Package[$apcupsd::params::package_name],
-    notify  => Service[$apcupsd::params::service_name],
+    content => template("${module_name}/apcupsd.default.erb"),
+    require => Package[$apcupsd::params::package],
+    notify  => Service[$apcupsd::params::service],
   }
 
   apcupsd::apc_script { 'apccontrol': }

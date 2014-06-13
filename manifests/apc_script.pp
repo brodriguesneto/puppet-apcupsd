@@ -4,8 +4,8 @@ define apcupsd::apc_script ($conf = $title,) {
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    content => template("apcupsd/${conf}.erb"),
-    require => Package[$apcupsd::params::package_name],
-    notify  => Service[$apcupsd::params::service_name],
+    content => template("${module_name}/${conf}.erb"),
+    require => Package[$apcupsd::params::package],
+    notify  => Service[$apcupsd::params::service],
   }
 }
