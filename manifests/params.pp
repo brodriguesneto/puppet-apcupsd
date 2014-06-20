@@ -4,7 +4,7 @@ class apcupsd::params {
       case $::lsbdistrelease {
         /(12.04|14.04)/ : {
           $package        = 'apcupsd'
-          $package_extras = ['apcupsd-cgi', 'apcupsd-doc',]
+          $packages_extra = ['apcupsd-cgi', 'apcupsd-doc',]
           $service        = 'apcupsd'
         }
         default         : {
